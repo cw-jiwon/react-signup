@@ -3,26 +3,23 @@ import { Link } from 'react-router-dom'
 import './Navbar.css'
 
 function Navbar() {
-	const [sign, setSign] = useState(true)
+	const [sign, setSign] = useState(false)
 	const onClick = () => {
 		setSign(prev => !prev)
 	}
 	return (
 		<div>
 			<ul className='navbar'>
-				<li>
-					<Link to='/'>Home</Link>
-				</li>
 				{sign ? (
 					<li>
 						<Link to='/sign_in'>
-							<button onClick={onClick}>로그인</button>
+							<button onClick={onClick}>SIGN IN</button>
 						</Link>
 					</li>
 				) : (
 					<li>
 						<Link to='/sign_up'>
-							<button onClick={onClick}>회원가입</button>
+							<button onClick={onClick}>SIGN UP</button>
 						</Link>
 					</li>
 				)}

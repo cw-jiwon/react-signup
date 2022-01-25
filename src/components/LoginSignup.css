@@ -1,16 +1,17 @@
-.loginregister {
+.loginsignup {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 80vh;
+	padding: 20px;
 }
-.loginregister_input {
-	width: 290px;
+.loginsignup_input {
+	width: 90%;
 	height: 48px;
 	padding-left: 10px;
 	margin: 10px;
 }
-.loginregister_button {
+.loginsignup_button {
 	background-color: rgb(248, 47, 98);
 	color: rgb(255, 255, 255);
 	font-weight: 700;
@@ -18,4 +19,12 @@
 	border-radius: 40px;
 	height: 48px;
 	margin-top: 10px;
+}
+.icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 20px;
+	font-size: 100px;
+	color: #6495ed;
 }

@@ -1,3 +1,6 @@
+body {
+	margin: 0;
+}
 ul {
 	list-style: none;
 }
@@ -10,12 +13,13 @@ button {
 	border: 0;
 	color: #828282;
 	font-size: 20px;
+	font-weight: bold;
 }
 .navbar {
 	display: flex;
 }
 .navbar li {
-	text-align: center;
+	text-align: right;
 	flex: 1;
-	padding: 10px;
+	padding: 10px 20px;
 }

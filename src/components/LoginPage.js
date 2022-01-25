@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
-import './LoginRegister.css'
+import React, { useState, useRef } from 'react'
+import { UserOutlined } from '@ant-design/icons'
+import AInput from './atoms/AInput'
+import AButton from './atoms/AButton'
+import './LoginSignup.css'
 
 function LoginPage() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
+
+	const emailInput = useRef(null)
 
 	const onEmailHandler = event => {
 		setEmail(event.currentTarget.value)
@@ -11,43 +16,37 @@ function LoginPage() {
 	const onPasswordHandler = event => {
 		setPassword(event.currentTarget.value)
 	}
-	const onSubmit = event => {
+	const login = event => {
 		event.preventDefault()
 	}
 
 	return (
-		<div class='loginregister'>
-			<form>
-				<div>
-					<input
-						name='email'
-						type='email'
-						placeholder='이메일'
-						value={email}
-						onChange={onEmailHandler}
-						class='loginregister_input'
-					/>
-				</div>
-				<div>
-					<input
-						name='password'
-						type='password'
-						placeholder='비밀번호'
-						value={password}
-						onChange={onPasswordHandler}
-						class='loginregister_input'
-					/>
-				</div>
-				<div>
-					<button
-						type='submit'
-						onSubmit={onSubmit}
-						class='loginregister_button'
-					>
-						로그인
-					</button>
-				</div>
-			</form>
+		<div className='loginsignup'>
+			<div>
+				<UserOutlined className='icon' />
+				<AInput
+					name='email'
+					type='email'
+					placeholder='EMAIL'
+					value={email}
+					ref={emailInput}
+					onChange={onEmailHandler}
+					className='loginsignup_input'
+				/>
+				<AInput
+					name='password'
+					type='password'
+					placeholder='PASSWORD'
+					value={password}
+					onChange={onPasswordHandler}
+					className='loginsignup_input'
+				/>
+				<AButton
+					onClick={login}
+					className='loginsignup_button'
+					text='LOGIN'
+				/>
+			</div>
 		</div>
 	)
 }
