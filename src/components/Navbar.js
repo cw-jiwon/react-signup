@@ -8,7 +8,7 @@ function Navbar() {
 		setSign(prev => !prev)
 	}
 	return (
-		<div>
+		<>
 			<ul className='navbar'>
 				{sign ? (
 					<li>
@@ -24,7 +24,7 @@ function Navbar() {
 					</li>
 				)}
 			</ul>
-		</div>
+		</>
 	)
 }
 

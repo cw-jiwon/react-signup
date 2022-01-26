@@ -1,31 +1,65 @@
-import React, { useState, useRef } from 'react'
+import React, {
+	useState,
+	useRef,
+	useEffect,
+	useCallback,
+	useReducer
+} from 'react'
 import { UserAddOutlined } from '@ant-design/icons'
 import AInput from './atoms/AInput'
 import AButton from './atoms/AButton'
 import UserList from './UserList'
 import './LoginSignup.css'
 
-function SignupPage() {
-	const [inputs, setInputs] = useState({
+function reducer(state, action) {
+	switch (action.type) {
+		case 'CHANGE_INPUT':
+			return {
+				...state,
+				inputs: {
+					...state.inputs,
+					[action.name]: action.value
+				}
+			}
+		default:
+			return state
+	}
+}
+
+const initialState = {
+	inputs: {
 		name: '',
 		email: '',
 		password: '',
 		confirmPassword: ''
-	})
-	const { name, email, password, confirmPassword } = inputs
+	},
+	users: []
+}
+
+function SignupPage() {
+	useEffect(() => {
+		console.log('mount')
+		return () => {
+			console.log('unmount')
+		}
+	}, [])
+
+	const [state, dispatch] = useReducer(reducer, initialState)
+	const { name, email, password, confirmPassword } = state.inputs
 
 	const passwordInput = useRef(null)
 
-	const onChangeHandler = event => {
+	const onChangeHandler = useCallback(event => {
 		const { name, value } = event.currentTarget
-		setInputs({
-			...inputs,
-			[name]: value
+		dispatch({
+			type: 'CHANGE_INPUT',
+			name,
+			value
 		})
-	}
+	}, [])
 
 	const [users, setUsers] = useState([])
-	const signup = () => {
+	const signup = useCallback(() => {
 		if (password !== confirmPassword) {
 			passwordInput.current.focus()
 			return alert('비밀번호와 비밀번호확인은 같아야 합니다.')
@@ -37,7 +71,7 @@ function SignupPage() {
 			confirmPassword
 		}
 		setUsers([...users, user])
-	}
+	}, [users, name, email, password, confirmPassword])
 
 	return (
 		<div className='loginsignup'>
