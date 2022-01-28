@@ -1,77 +1,54 @@
-import React, {
-	useState,
-	useRef,
-	useEffect,
-	useCallback,
-	useReducer
-} from 'react'
+import React, { useState, useRef, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { UserAddOutlined } from '@ant-design/icons'
 import AInput from './atoms/AInput'
 import AButton from './atoms/AButton'
-import UserList from './UserList'
+import { useUsersDispatch, useUserId, postUser } from '../UserContext'
 import './LoginSignup.css'
 
-function reducer(state, action) {
-	switch (action.type) {
-		case 'CHANGE_INPUT':
-			return {
-				...state,
-				inputs: {
-					...state.inputs,
-					[action.name]: action.value
-				}
-			}
-		default:
-			return state
-	}
-}
-
-const initialState = {
-	inputs: {
+function SignupPage() {
+	const [inputs, setInputs] = useState({
 		name: '',
 		email: '',
 		password: '',
 		confirmPassword: ''
-	},
-	users: []
-}
-
-function SignupPage() {
-	useEffect(() => {
-		console.log('mount')
-		return () => {
-			console.log('unmount')
-		}
-	}, [])
-
-	const [state, dispatch] = useReducer(reducer, initialState)
-	const { name, email, password, confirmPassword } = state.inputs
+	})
+	const { name, email, password, confirmPassword } = inputs
+	const dispatch = useUsersDispatch()
+	const nextId = useUserId()
+	const navigate = useNavigate()
 
 	const passwordInput = useRef(null)
 
-	const onChangeHandler = useCallback(event => {
-		const { name, value } = event.currentTarget
-		dispatch({
-			type: 'CHANGE_INPUT',
-			name,
-			value
-		})
-	}, [])
+	const onChangeHandler = useCallback(
+		event => {
+			const { name, value } = event.currentTarget
+			setInputs({
+				...inputs,
+				[name]: value
+			})
+		},
+		[inputs]
+	)
 
-	const [users, setUsers] = useState([])
 	const signup = useCallback(() => {
 		if (password !== confirmPassword) {
 			passwordInput.current.focus()
 			return alert('비밀번호와 비밀번호확인은 같아야 합니다.')
 		}
 		const user = {
-			name,
-			email,
-			password,
-			confirmPassword
+			id: nextId.current,
+			email
 		}
-		setUsers([...users, user])
-	}, [users, name, email, password, confirmPassword])
+		nextId.current += 1
+		const response = postUser(dispatch, user)
+		if (response) {
+			alert('회원가입에 성공하였습니다.')
+			navigate('/sign_in')
+		} else {
+			alert('회원가입에 실패하였습니다.')
+		}
+	}, [password, confirmPassword, nextId, email, dispatch, navigate])
 
 	return (
 		<div className='loginsignup'>
@@ -115,7 +92,6 @@ function SignupPage() {
 					className='loginsignup_button'
 					text='REGISTER'
 				/>
-				<UserList users={users} />
 			</div>
 		</div>
 	)
