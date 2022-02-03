@@ -1,6 +1,7 @@
-// reducer
 export function createAsyncHandler() {
+	// 1 (최초)
 	function handler(state, action) {
+		// 2
 		switch (action.type) {
 			case 'GET_USERS':
 				return {
@@ -15,6 +16,16 @@ export function createAsyncHandler() {
 					...state,
 					data
 				}
+			case 'DELETE_USER':
+				const data2 = state.users.data.filter(
+					item => item.id !== action.data
+				)
+				return {
+					...state,
+					users: {
+						data: data2
+					}
+				}
 			default:
 				return state
 		}
@@ -24,20 +35,30 @@ export function createAsyncHandler() {
 }
 
 export function createAsyncDispatcher(type, promiseFn) {
+	// 2 (최초)
 	async function actionHandler(dispatch, param) {
-		// dispatch({ type })
+		// 1
 		try {
-			if (type === 'GET_USERS') {
-				const data = await promiseFn()
-				dispatch({
-					type,
-					data
-				})
-			} else {
-				dispatch({
-					type,
-					data: param
-				})
+			switch (type) {
+				case 'GET_USERS':
+					const data = await promiseFn()
+					dispatch({
+						type,
+						data
+					})
+					break
+				case 'POST_USER':
+				case 'DELETE_USER':
+					dispatch({
+						type,
+						data: param
+					})
+					break
+				default:
+					dispatch({
+						type: 'ERROR'
+					})
+					break
 			}
 		} catch (error) {
 			dispatch({

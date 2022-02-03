@@ -28,3 +28,20 @@
 	font-size: 100px;
 	color: #6495ed;
 }
+.title {
+	width: 100%;
+	background-color: #6495ed;
+	color: white;
+	text-align: center;
+}
+.userlist li {
+	font-weight: bold;
+	padding-bottom: 10px;
+}
+.userlist button {
+	border-radius: 15px;
+	padding: 2px 7px;
+	background-color: rgb(248, 47, 98);
+	color: white;
+	margin-left: 5px;
+}

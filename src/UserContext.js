@@ -16,6 +16,8 @@ function usersReducer(state, action) {
 			return usersHandler(state, action)
 		case 'POST_USER':
 			return usersHandler(state, action)
+		case 'DELETE_USER':
+			return usersHandler(state, action)
 		default:
 			throw new Error(`Unhanded action type: ${action.type}`)
 	}
@@ -67,3 +69,4 @@ export function useUserId() {
 
 export const getUsers = createAsyncDispatcher('GET_USERS', api.getUsers)
 export const postUser = createAsyncDispatcher('POST_USER')
+export const deleteUser = createAsyncDispatcher('DELETE_USER')

@@ -13,11 +13,11 @@ function LoginPage() {
 	const dispatch = useUsersDispatch()
 	const navigate = useNavigate()
 
+	const { data: users } = state.users
+
 	useEffect(() => {
 		!users && getUsers(dispatch)
-	}, [dispatch])
-
-	const { data: users } = state.users
+	}, [dispatch, users])
 
 	const emailInput = useRef(null)
 	const passwordInput = useRef(null)

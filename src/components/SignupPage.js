@@ -44,7 +44,7 @@ function SignupPage() {
 		const response = postUser(dispatch, user)
 		if (response) {
 			alert('회원가입에 성공하였습니다.')
-			navigate('/sign_in')
+			navigate('/')
 		} else {
 			alert('회원가입에 실패하였습니다.')
 		}

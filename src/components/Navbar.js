@@ -12,7 +12,7 @@ function Navbar() {
 			<ul className='navbar'>
 				{sign ? (
 					<li>
-						<Link to='/sign_in'>
+						<Link to='/'>
 							<button onClick={onClick}>SIGN IN</button>
 						</Link>
 					</li>
