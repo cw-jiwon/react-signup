@@ -14,11 +14,12 @@ function SignupPage() {
 		confirmPassword: ''
 	})
 	const { name, email, password, confirmPassword } = inputs
-	const dispatch = useUsersDispatch()
-	const nextId = useUserId()
+	const passwordInput = useRef(null)
+
 	const navigate = useNavigate()
 
-	const passwordInput = useRef(null)
+	const nextId = useUserId()
+	const dispatch = useUsersDispatch()
 
 	const onChangeHandler = useCallback(
 		event => {
@@ -30,7 +31,6 @@ function SignupPage() {
 		},
 		[inputs]
 	)
-
 	const signup = useCallback(() => {
 		if (password !== confirmPassword) {
 			passwordInput.current.focus()

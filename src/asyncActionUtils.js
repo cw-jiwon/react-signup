@@ -6,25 +6,21 @@ export function createAsyncHandler() {
 			case 'GET_USERS':
 				return {
 					...state,
-					users: {
-						data: action.data
-					}
+					users: action.data
 				}
 			case 'POST_USER':
-				const data = action.data && state.users.data.push(action.data)
+				const all_users = state.users.concat(action.data)
 				return {
 					...state,
-					data
+					users: all_users
 				}
 			case 'DELETE_USER':
-				const data2 = state.users.data.filter(
+				const left_users = state.users.filter(
 					item => item.id !== action.data
 				)
 				return {
 					...state,
-					users: {
-						data: data2
-					}
+					users: left_users
 				}
 			default:
 				return state
