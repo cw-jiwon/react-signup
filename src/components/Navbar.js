@@ -4,9 +4,11 @@ import './Navbar.css'
 
 function Navbar() {
 	const [sign, setSign] = useState(false)
+
 	const onClick = () => {
 		setSign(prev => !prev)
 	}
+	
 	return (
 		<>
 			<ul className='navbar'>

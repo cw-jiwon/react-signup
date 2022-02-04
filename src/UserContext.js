@@ -3,9 +3,7 @@ import { createAsyncDispatcher, createAsyncHandler } from './asyncActionUtils'
 import * as api from './api'
 
 const initialState = {
-	users: {
-		data: null
-	}
+	users: null
 }
 
 const usersHandler = createAsyncHandler()

@@ -9,18 +9,18 @@ import './LoginSignup.css'
 function LoginPage() {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
-	const state = useUsersState()
-	const dispatch = useUsersDispatch()
+	const emailInput = useRef(null)
+	const passwordInput = useRef(null)
+
 	const navigate = useNavigate()
 
-	const { data: users } = state.users
+	const state = useUsersState()
+	const dispatch = useUsersDispatch()
+	const users = state.users
 
 	useEffect(() => {
 		!users && getUsers(dispatch)
 	}, [dispatch, users])
-
-	const emailInput = useRef(null)
-	const passwordInput = useRef(null)
 
 	const onEmailHandler = event => {
 		setEmail(event.currentTarget.value)

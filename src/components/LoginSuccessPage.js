@@ -5,7 +5,7 @@ import AButton from './atoms/AButton'
 function LoginSuccessPage() {
 	const state = useUsersState()
 	const dispatch = useUsersDispatch()
-	const { data: users } = state.users
+	const users = state.users
 
 	const leave = userId => {
 		const confirm = window.confirm('정말 탈퇴하시겠습니끼?')
